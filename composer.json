@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpunit/phpunit": "4.3.5",
+        "phpunit/phpunit-skeleton-generator": "dev-master",
+        "php-activerecord/php-activerecord": "dev-master"
+    }
+}
