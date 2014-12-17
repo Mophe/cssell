@@ -67,6 +67,7 @@ class CoreOrder {
         foreach (Record::all(array('order_id' => $id)) as $key => $value) {
             $result[$key] = array(
                 'commodity' => $value->commodity->name,
+                'price'=>$value->commodity->price,
                 'number' => $value->number
             );
         }
