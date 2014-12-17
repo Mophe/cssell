@@ -33,7 +33,7 @@ class CoreNotice {
      * @assert ('haha') == true
      * @assert ('hehe') == true
      */
-    public function changeNotice($content) {
+    public function modifyNotice($content) {
         $notice = Notice::first();
         if ($notice === null) {
             Notice::create(array(

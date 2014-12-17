@@ -169,6 +169,82 @@ function deleteOrder() {
     }
 }
 
+function getNotice() {
+    $notice = new CoreNotice();
+    return $notice->getNotice();
+}
+
+function modifyNotice() {
+    $args = filter_input_array(INPUT_POST, array(
+        'content' => FILTER_DEFAULT
+    ));
+    $notice = new CoreNotice();
+    if ($notice->modifyNotice($args['content']) !== false) {
+        return array();
+    } else {
+        throw new Exception('modify Notice Error');
+    }
+}
+
+function addBill() {
+    $args = filter_input_array(INPUT_POST, array(
+        'money' => FILTER_DEFAULT,
+        'introduction' => FILTER_DEFAULT
+    ));
+    if ($args === false || count(array_filter($args, function ($item) {
+                        return $item === false || $item === null;
+                    })) !== 0) {
+        throw new Exception('args error');
+    }
+    $bill = new CoreBill();
+    if ($bill->addBill($money, $introduction) === true) {
+        return array();
+    } else {
+        throw new Exception('Bill Exists');
+    }
+}
+
+function modifyBill() {
+    $args = filer_input_array(INPUT_POST, array(
+        'bill_id' => FILTER_DEFAULT,
+        'money' => FILTER_DEFAULT,
+        'introduction' => FILTER_DEFAULT
+    ));
+    if ($args === false || count(array_filter($args, function ($item) {
+                        return $item === false || $item === null;
+                    })) !== 0) {
+        throw new Exception('args error');
+    }
+    $bill = new CoreBill();
+    if ($bill->modifyBill($args['bill_id'], $args['money'], $args['introduction']) === true) {
+        return array();
+    } else {
+        throw new Exception('Modify Bill Error');
+    }
+}
+
+function deleteBill() {
+    $args = filter_input_array(INPUT_POST, array(
+        'bill_id' => FILTER_DEFAULT
+    ));
+    if ($args === false || count(array_filter($args, function ($item) {
+                        return $item === false || $item === null;
+                    })) !== 0) {
+        throw new Exception('args error');
+    }
+    $bill = new CoreBill();
+    if ($bill->deleteBill($args['bill_id']) === true) {
+        return array();
+    } else {
+        throw new Exception('Delete Bill Error');
+    }
+}
+
+function getBills() {
+    $bill = new CoreBill();
+    return $bill->getBills();
+}
+
 function countMoney() {
     $args = filter_input_array(INPUT_POST, array(
         'start' => FILTER_DEFAULT,
@@ -181,23 +257,6 @@ function countMoney() {
     }
     $record = new CoreBill();
     return array('price' => $record->countMoney($args['start'], $args['end']));
-}
-
-function getNotice() {
-    $notice = new CoreNotice();
-    return $notice->getNotice();
-}
-
-function changeNotice() {
-    $args = filter_input_array(INPUT_POST, array(
-        'content' => FILTER_DEFAULT
-    ));
-    $notice = new CoreNotice();
-    if ($notice->changeNotice($args['content']) !== false) {
-        return array();
-    } else {
-        throw new Exception('Change Notice Error');
-    }
 }
 
 try {
