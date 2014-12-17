@@ -34,7 +34,7 @@ function checkLogin() {
     }
 }
 
-function addUser() {
+function addUser() { 
     $args = filter_input_array(INPUT_POST, array(
         'username' => FILTER_DEFAULT,
         'password' => FILTER_DEFAULT
