@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2014-12-17 15:16:58
+-- Generation Time: 2014-12-17 15:52:56
 -- 服务器版本： 5.6.20
 -- PHP Version: 5.5.15
 
@@ -30,7 +30,14 @@ CREATE TABLE IF NOT EXISTS `advices` (
 `id` int(11) NOT NULL,
   `content` varchar(255) NOT NULL,
   `time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `advices`
+--
+
+INSERT INTO `advices` (`id`, `content`, `time`) VALUES
+(1, '啊哈哈哈哈', '2014-12-19 08:22:35');
 
 -- --------------------------------------------------------
 
@@ -105,7 +112,14 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `content` varchar(255) NOT NULL,
   `price` double NOT NULL,
   `time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `orders`
+--
+
+INSERT INTO `orders` (`id`, `name`, `phone`, `content`, `price`, `time`) VALUES
+(1, '张三', '13000000000', '哈哈', 1, '2014-12-18 10:26:21');
 
 -- --------------------------------------------------------
 
@@ -118,7 +132,14 @@ CREATE TABLE IF NOT EXISTS `records` (
   `order_id` int(11) NOT NULL,
   `commodity_id` int(11) NOT NULL,
   `number` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- 转存表中的数据 `records`
+--
+
+INSERT INTO `records` (`id`, `order_id`, `commodity_id`, `number`) VALUES
+(1, 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -194,7 +215,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `advices`
 --
 ALTER TABLE `advices`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `bills`
 --
@@ -214,12 +235,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `records`
 --
 ALTER TABLE `records`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `users`
 --
