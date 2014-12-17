@@ -2,17 +2,20 @@
 ====================================
 
 功能模块
-------------------------------------
+-------
 
-	商品模块
-	订单模块
-	通知模块
-	建议模块
-	记账模块
+商品模块
+订单模块
+通知模块
+建议模块
+记账模块
 
 接口规范(参数，返回值)
 --------
-结果中自带result属性，若在下文中提及result属性，则表明数据返回只有此属性，若未提及，则表明此返回数据包含data属性，属性值如下
+结果中自带result属性，若在下文中提及result属性，则表明数据返回只有此属性，若未提及，则表明此返回数据包含data属性，属性值在返回值中
+	{'result'=>true,'data'=>?}
+
+用户：
 ###login
 	{'username'=>'a','password'=>'a'} {'result'=>true}
 ###checkLogin
@@ -23,12 +26,16 @@
 	{} [{'username'=>'a'}]
 ###deleteUser
 	{'username'=>'a'} {'result'=>true}
+
+商品：
 ###getCommodities
 	{} [{'name'=>'a','price'=>1,'introduction'=>'haha'}]
 ###addCommodity
 	{'name'=>'a','price'=>1,'introduction'=>'haha'} {'result'=>true}
 ###deleteCommodity
 	{'name'=>'a'} {'result'=>true}
+	
+订单：
 ###addOrder
 	{'name'=>'a','phone'=>13000000000,'commodities'=>[{'name'=>'a','price'=>1,'number'=>1}],'content'=>'haha'}
 ###getOrder
@@ -37,10 +44,14 @@
 	{'order_id'=>1} [{'commodity'=>'a','price'=>1,'number'=>1}]
 ###deleteOrder
 	{'order_id'=>1} {'result'=>true}
+	
+通知：
 ###getNotice
 	{} {'content'=>'haha'}
 ###modifyNotice
 	{'content'=>'haha'} {'result'=>true}
+
+账单：
 ###addBill
 	{'money'=>100,'introduction'=>'haha'} {'result'=>true}
 ###modifyBill

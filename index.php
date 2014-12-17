@@ -227,11 +227,6 @@ try {
     spl_autoload_register('autoloadClass');
     $method = filter_input(INPUT_GET, 'method');
     if (function_exists($method)) {
-        require __DIR__ . '/vendor/autoload.php';
-        ActiveRecord\Config::initialize(function($cfg) {
-            $cfg->set_model_directory('models');
-            $cfg->set_connections(array('development' => 'mysql://root:@localhost/sell;charset=utf8'));
-        });
         $result = call_user_func($method);
     } else {
         throw new Exception('not method');

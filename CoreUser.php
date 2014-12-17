@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of User
- *
- * @author HJava
- */
 class CoreUser {
 
     function __construct() {
@@ -23,15 +12,6 @@ class CoreUser {
         });
     }
 
-    /**
-     *
-     * @param type $username
-     * @param type $password
-     * @return boolean
-     *
-     * @assert ('a', 'a') == true
-     * @assert ('a', 'b') == false
-     */
     public function login($username, $password) {
         $user = User::first(array('username' => $username));
         if ($user && $user->password === md5($password . $user->salt)) {
@@ -49,15 +29,6 @@ class CoreUser {
         return true;
     }
 
-    /**
-     *
-     * @param type $username
-     * @param type $password
-     * @return boolean
-     *
-     * @assert ('b', 'b') == true
-     * @assert ('c', 'c') == true
-     */
     public function addUser($username, $password) {
         $user = User::first(array('username' => $username));
         if ($user === null) {
@@ -82,15 +53,6 @@ class CoreUser {
         return $salt;
     }
 
-    /**
-     *
-     * @param type $username
-     * @return boolean
-     *
-     * @assert ('b') == true
-     * @assert ('c') == true
-     * @assert ('d') == false
-     */
     public function deleteUser($username) {
         $user = User::first(array('username' => $username));
         if ($user !== null) {

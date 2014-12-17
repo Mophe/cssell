@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of CoreNotice
- *
- * @author HJava
- */
 class CoreNotice {
 
     function __construct() {
@@ -23,16 +12,6 @@ class CoreNotice {
         });
     }
 
-    /**
-     *
-     * @param type $start
-     * @param type $end
-     * @param type $content
-     * @return boolean
-     *
-     * @assert ('haha') == true
-     * @assert ('hehe') == true
-     */
     public function modifyNotice($content) {
         $notice = Notice::first();
         if ($notice === null) {
@@ -45,10 +24,6 @@ class CoreNotice {
         return true;
     }
 
-    /**
-     *
-     * @return type
-     */
     public function getNotice() {
         $notice = Notice::first();
         $result = array_intersect_key($notice->to_array(), array_flip(array('content')));

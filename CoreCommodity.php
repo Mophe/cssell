@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of CoreCommodity
- *
- * @author HJava
- */
 class CoreCommodity {
 
     function __construct() {
@@ -31,15 +20,6 @@ class CoreCommodity {
         return $result;
     }
 
-    /**
-     *
-     * @param type $name
-     * @param type $price
-     * @param type $introduction
-     * @return boolean
-     *
-     * @assert ('a', 10, 'aaa') == true
-     */
     public function addCommodity($name, $price, $introduction) {
         $commodity = Commodity::first(array('name', $name));
         if ($commodity === null) {
@@ -54,14 +34,6 @@ class CoreCommodity {
         }
     }
 
-    /**
-     *
-     * @param type $name
-     * @return boolean
-     *
-     * @assert ('a') == true
-     * @assert ('b') == false
-     */
     public function deleteCommodity($name) {
         $commodity = Commodity::first(array('name' => $name));
         if ($commodity) {
