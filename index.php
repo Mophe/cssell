@@ -8,7 +8,7 @@ function autoloadClass($filename) {
 }
 
 function login() {
-    $args = filter_input_array(INPUT_GET, array(
+    $args = filter_input_array(INPUT_POST, array(
         'username' => FILTER_DEFAULT,
         'password' => FILTER_DEFAULT
     ));
@@ -50,6 +50,11 @@ function addUser() {
     } else {
         throw new Exception('Add User Error');
     }
+}
+
+function getUsers() {
+    $user = new CoreUser();
+    return $user->getUsers();
 }
 
 function deleteUser() {
@@ -109,20 +114,58 @@ function deleteCommodity() {
     }
 }
 
-function addRecord() {
+function addOrder() {
     $args = filter_input_array(INPUT_POST, array(
+        'name' => FILTER_DEFAULT,
+        'phone' => FILTER_DEFAULT,
         'commodities' => FILTER_DEFAULT,
+        'content' => FILTER_DEFAULT
     ));
     if ($args === false || count(array_filter($args, function ($item) {
                         return $item === false || $item === null;
                     })) !== 0) {
         throw new Exception('args error');
     }
-    $record = new CoreRecord();
-    if ($record->addRecord($args['commodities'])) {
+    $order = new CoreOrder();
+    if ($order->addOrder($args['name'], $args['phone'], $args['commodities'], $args['content'])) {
         return array();
     } else {
         throw new Exception('Add Record Error');
+    }
+}
+
+function getOrders() {
+    $order = new CoreOrder();
+    return $order->getOrders();
+}
+
+function getOrderDetails() {
+    $args = filter_input_array(INPUT_POST, array(
+        'order_id' => FILTER_DEFAULT
+    ));
+    if ($args === false || count(array_filter($args, function ($item) {
+                        return $item === false || $item === null;
+                    })) !== 0) {
+        throw new Exception('args error');
+    }
+    $order = new CoreOrder();
+    return $order->getOrderDetails($args['order_id']);
+}
+
+function deleteOrder() {
+    $args = filter_input_array(INPUT_POST, array(
+        'order_id' => FILTER_DEFAULT
+    ));
+    if ($args === false || count(array_filter($args, function ($item) {
+                        return $item === false || $item === null;
+                    })) !== 0) {
+        throw new Exception('args error');
+    }
+    $order = new CoreOrder();
+    if ($order->deleteOrder($args['order_id'])) {
+        return array();
+    } else {
+        throw new Exception('Delete Error');
     }
 }
 
@@ -136,8 +179,25 @@ function countMoney() {
                     })) !== 0) {
         throw new Exception('args error');
     }
-    $record = new CoreRecord();
+    $record = new CoreBill();
     return array('price' => $record->countMoney($args['start'], $args['end']));
+}
+
+function getNotice() {
+    $notice = new CoreNotice();
+    return $notice->getNotice();
+}
+
+function changeNotice() {
+    $args = filter_input_array(INPUT_POST, array(
+        'content' => FILTER_DEFAULT
+    ));
+    $notice = new CoreNotice();
+    if ($notice->changeNotice($args['content']) !== false) {
+        return array();
+    } else {
+        throw new Exception('Change Notice Error');
+    }
 }
 
 try {

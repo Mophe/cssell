@@ -41,7 +41,7 @@ class CoreCommodity {
      * @assert ('a', 10, 'aaa') == true
      */
     public function addCommodity($name, $price, $introduction) {
-        $commodity = Commodity::first(array('conditions' => array('name', $name)));
+        $commodity = Commodity::first(array('name', $name));
         if ($commodity === null) {
             Commodity::create(array(
                 'name' => $name,

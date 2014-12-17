@@ -50,7 +50,8 @@ class CoreNotice {
      * @return type
      */
     public function getNotice() {
-        $result = array_intersect_key(Notice::first()->to_array(), array_flip(array('content', 'time')));
+        $notice = Notice::first();
+        $result = array_intersect_key($notice->to_array(), array_flip(array('content')));
         return $result;
     }
 

@@ -59,7 +59,7 @@ class CoreUser {
      * @assert ('c', 'c') == true
      */
     public function addUser($username, $password) {
-        $user = User::first(array('conditions' => array('username' => $username)));
+        $user = User::first(array('username' => $username));
         if ($user === null) {
             $salt = $this->createSalt(4);
             User::create(array(
@@ -99,6 +99,14 @@ class CoreUser {
         } else {
             return false;
         }
+    }
+
+    function getUsers() {
+        $result = array();
+        foreach (User::all() as $key => $value) {
+            $result[$key] = array_intersect_key($value->to_array(), array_flip(array('username')));
+        }
+        return $result;
     }
 
 }

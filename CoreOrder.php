@@ -26,7 +26,6 @@ class CoreOrder {
     public function addOrder($name, $phone, $commodities, $content) {
         $price = 0;
         $all = array();
-        var_dump(Commodity::all());
         foreach (Commodity::all() as $value) {
             $all[$value->id] = $value->name;
         }
@@ -56,25 +55,28 @@ class CoreOrder {
     }
 
     public function getOrders() {
-
-    }
-
-    public function getOrderDetails() {
-
-    }
-
-    public function countMoney($start, $end) {
-        $records = Order::all(array('conditions' => array('time > ? and time < ?', $start, $end)));
-        $price = 0;
-        foreach ($records as $value) {
-            $price += $value['price'];
+        $result = array();
+        foreach (Order::all() as $key => $value) {
+            $result[$key] = array_intersect_key($value->to_array(), array_flip(array('id', 'name', 'phone', 'content', 'price', 'time')));
         }
-        return price;
+        return $result;
+    }
+
+    public function getOrderDetails($id) {
+        $result = array();
+        foreach (Record::all(array('order_id' => $id)) as $key => $value) {
+            $result[$key] = array(
+                'commodity' => $value->commodity->name,
+                'number' => $value->number
+            );
+        }
+        return $result;
     }
 
     public function deleteOrder($id) {
-        $order = Order::first(array('conditions' => array('id' => $id)));
+        $order = Order::first(array('id' => $id));
         if ($order !== null) {
+            Record::delete_all(array('conditions' => array('order_id' => $id)));
             $order->delete();
             return true;
         } else {
@@ -83,3 +85,4 @@ class CoreOrder {
     }
 
 }
+

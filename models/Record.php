@@ -14,5 +14,9 @@
 class Record extends \ActiveRecord\Model {
 
     static $table_name = 'records';
+    static $belongs_to = array(
+        array('order'),
+        array('commodity')
+    );
 
 }
