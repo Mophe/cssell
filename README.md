@@ -3,7 +3,7 @@
 
 功能模块
 ------------------------------------
-	管理员模块
+	
 	商品模块
 	订单模块
 	通知模块
@@ -13,7 +13,18 @@
 接口规范(参数，返回值)
 --------
 ###login
-	{'username','password'} {'result'}
+	{'username'=>'a','password'=>'a'} {'result'=>true}
 ###checkLogin
-	{} {'result'}
+	{} {'result'=>true}
+###addUser
+	{'username'=>'a','password'=>'a'} {'result'=>true}
+###getUsers
+	{} [{'username'=>'a'}]
+###deleteUser
+	{'username'=>'a'} {'result'=>true}
+###getCommodities
+	{} [{'name'=>'a','price'=>1,'introduction'=>'haha'}]
+###addCommodity
+	{'name'=>'a','price'=>1,'introduction'=>'haha'} {'result'=>true}
+	
 
